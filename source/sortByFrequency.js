@@ -14,7 +14,7 @@ const sortByFrequency = (numbers) => {
   if (!Array.isArray(numbers)) {
     throw new TypeError("Argument must be an array");
   }
-  
+
   if (!numbers.every((n) => typeof n === "number")) {
     throw new TypeError("Array must contain only numbers");
   }
@@ -34,7 +34,7 @@ const sortByFrequency = (numbers) => {
   const result = [];
 
   entries.forEach(([num, count]) => {
-    for (let i = 0; i < count; ++i) result.push(num);
+    result.push(...Array(count).fill(num));
   });
 
   return result;
