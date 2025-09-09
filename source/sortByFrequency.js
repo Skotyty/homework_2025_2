@@ -9,25 +9,25 @@
  * 
  * @returns {Array<Number>}
  */
-function sortByFrequency(numbers) {
+ const sortByFrequency = (numbers) => {
   const map = new Map();
 
-  for (const num of numbers) {
+  numbers.forEach((num) => {
     if (map.has(num)) {
       map.set(num, map.get(num) + 1);
     } else {
       map.set(num, 1);
     }
-  }
+  })
 
-  const entries = [...map.entries()].sort((a, b) => b[1] - a[1]);
-  const result = [];
+  const entries = Array.from(map).sort((a, b) => b[1] - a[1]);
   
-  for (const [num, count] of entries) {
-    for (let i = 0; i < count; ++i){
-      result.push(num);
-    }
-  }
+  const result = [];
+
+  entries.forEach(([num, count]) => {
+    for (let i = 0; i < count; ++i)
+      result.push(num)
+  })
 
   return result;
 }
