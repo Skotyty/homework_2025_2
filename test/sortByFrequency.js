@@ -30,4 +30,16 @@ QUnit.module("Тестируем функцию sortByFrequency", function() {
 
         assert.deepEqual(result, [0, 0, 0, 0, -3, -3, -3, -1, -1, -2], "Массив должен корректно работать с нулём и отрицательными числами");
     })
+
+    QUnit.test("Бросает ошибку, если передан не массив", function(assert) {
+        assert.throws(() => sortByFrequency("123"), TypeError, "Должен бросить TypeError");
+        assert.throws(() => sortByFrequency(42), TypeError, "Должен бросить TypeError");
+        assert.throws(() => sortByFrequency({a:1}), TypeError, "Должен бросить TypeError");
+    });
+
+    QUnit.test("Бросает ошибку, если массив содержит не только числа", function(assert) {
+        assert.throws(() => sortByFrequency([1, "2", 3]), TypeError, "Должен бросить TypeError при строке в массиве");
+        assert.throws(() => sortByFrequency([1, null, 3]), TypeError, "Должен бросить TypeError при null в массиве");
+        assert.throws(() => sortByFrequency([1, true, 3]), TypeError, "Должен бросить TypeError при boolean в массиве");
+    });
 });
