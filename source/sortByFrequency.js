@@ -10,24 +10,22 @@
  * @returns {Array<Number>}
  */
 const sortByFrequency = (numbers) => {
-
   if (!Array.isArray(numbers)) {
     throw new TypeError("Argument must be an array");
   }
 
-  if (!numbers.every((n) => typeof n === "number")) {
-    throw new TypeError("Array must contain only numbers");
+  const isNumeric = (n) =>
+    (typeof n === "number" || n instanceof Number) &&
+    Number.isFinite(Number(n));
+
+  if (!numbers.every(isNumeric)) {
+    throw new TypeError("Array must contain only finite numbers");
   }
 
-  const map = new Map();
-
-  numbers.forEach((num) => {
-    if (map.has(num)) {
-      map.set(num, map.get(num) + 1);
-    } else {
-      map.set(num, 1);
-    }
-  });
+  const map = numbers.reduce((map, num) => {
+    map.set(num, (map.get(num) || 0) + 1);
+    return map;
+  }, new Map());
 
   const entries = Array.from(map).sort((a, b) => b[1] - a[1]);
 
