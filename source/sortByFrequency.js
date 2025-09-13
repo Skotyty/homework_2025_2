@@ -14,6 +14,16 @@ const sortByFrequency = (numbers) => {
     throw new TypeError("Argument must be an array");
   }
 
+  /**
+   * Проверяет, является ли значение конечным числом (примитивом или объектом Number).
+   * @param {number|Number} n - проверяемое значение
+   * 
+   * @example
+   * returns true
+   * isNumeric(1)
+   * 
+   * @returns {boolean}
+   */
   const isNumeric = (n) =>
     (typeof n === "number" || n instanceof Number) &&
     Number.isFinite(Number(n));
